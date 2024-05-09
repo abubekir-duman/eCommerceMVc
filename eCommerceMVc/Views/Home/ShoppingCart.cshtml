@@ -1,0 +1,108 @@
+﻿@model List<ShoppingCart>﻿
+
+@{
+    int index = 0;
+}
+
+<div>
+    <h3>Sepetim</h3>
+</div>
+
+<div class="mt-2">
+    @if (Model.Count() == 0)
+    {
+        <h3 class="alert alert-dark">Sepette ürün bulunamadı</h3>
+    }
+    else
+    {
+    <div class="row">
+        <div class="col-9">
+            <table class="table table-hover">
+                <thead></thead>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ürün Adı</th>
+                        <th>Fiyatı</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        index++;
+                        <tr>
+                        <td>1</td>
+                        <td>
+                            <img src="/images/@item.ImageUrl" width="100"
+                            />
+                        </td>
+                        <td>@item.Name</td>
+                        <td>@item.Price</td>
+                        <td>
+                            <button class="btn btn-outline-danger btn-sm">
+                                Sil
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                   
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header"></div>
+                <h4 class="alert alert-success">
+                    @ViewBag.total.ToString("n2")
+                </h4>
+             </div>  
+             @if (TempData["Error"]!=null)
+            {
+                <div class="card-body">
+                    <h5 class="alert alert-danger">
+                        @TempData["Error"]
+                    </h5>
+                </div>
+            }
+                <form asp-controllers="Home" asp-action="Pay" method="post">
+                <div class="card-body mt-2">
+                    <div class="form-group">
+                        <label>Kart Sahibinin Adı</label>
+                        <input class="form-control" name="owner" value="Metin Demir"/>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Kart Numarası</label>
+                        <input class="form-control"  name="cardNumber" value="5890040000000016"/>
+                    </div>
+
+                    <div class="form-group mt-2 row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Son Kul. Tar.</label>
+                                <input class="form-control" name="expiryDate" value="12/2030"/>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>CVC</label>
+                                <input class="form-control" name="cvc" value="100" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <button type="submit" class="btn btn-success w-100">
+                            Ödeme Yap
+                        </button>
+                    </div>
+                </div>
+
+                </form>
+            </div>
+        </div>
+
+    }
+
+    </div>

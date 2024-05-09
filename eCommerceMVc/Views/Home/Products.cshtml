@@ -1,0 +1,62 @@
+﻿@model List<Product>
+@{
+    int index=0;
+}
+
+<div class="mt-2">
+    <form
+        asp-controller="Home"
+        asp-action="CreateProduct"
+        method="post"
+        enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Ürün Adı</label>
+            <input class="form-control" name="name"/>
+        </div>
+
+        <div class="form-group">
+            <label>Ürün Açıklaması</label>
+            <input class="form-control" name="description" />
+        </div>
+
+        <div class="form-group">
+            <label>Ürün Resmi</label>
+            <input type="file" class="form-control" name="file" />
+        </div>
+
+        <div class="form-group">
+            <label>Ürün Fiyatı</label>
+            <input class="form-control" name="price" />
+        </div>
+        <div class="form-group mt-2">
+            <button class="btn btn-dark w-100">Kaydet</button>
+        </div>
+
+    </form>
+</div>
+
+<div class="mt-2">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Ürün Resmi</th>
+                <th>Ürün Adı</th>
+                <th>Ürün Açıklaması</th>
+                <th>Ürün Price</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            index++;
+            <tr>
+                <td>@index</td>
+                <td><img src="/images/@item.ImageUrl" width="100"/></td>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.Price</td>
+            </tr>
+        }
+    </table>
+
+</div>

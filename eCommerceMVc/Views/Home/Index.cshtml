@@ -1,0 +1,40 @@
+﻿@model List<Product>
+
+@{
+    ViewData["Title"] = "Home Page";
+    int index = -1;
+}
+
+
+<div>
+    <h3>Ana Sayfa</h3>
+</div>
+
+<div clas="mt-2">
+    <div class="row">
+        @foreach(var product in Model)
+        {
+            index++;
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="/images/@product.ImageUrl" style="height:160px;overflow:hidden" />
+                    </div>
+                    <div class="card-header" style="height:160px;overflow:hidden">
+                        <h6>@product.Name</h6>
+                        <p>@product.Description</p>
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="alert alert-danger">
+                            @product.Price
+                        </h3>
+                        <a href="/Home/AddShoppingCart?id=@product.Id" class="btn btn-success w-100">
+                            Sepete Ekle
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
